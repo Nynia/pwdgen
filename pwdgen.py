@@ -6,7 +6,6 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def wechat_auth():
-    print 'hello world'
     if request.method == 'GET':
         token = 'cclove'
         signature = request.args.get('signature', '')
@@ -16,6 +15,7 @@ def wechat_auth():
         s = [timestamp, nonce, token]
         s.sort()
         s = ''.join(s)
-        print hashlib.sha1(s).hexdigest()
+        print hashlib.sha1(s).hexdigest(),signature
         if (hashlib.sha1(s).hexdigest() == signature):
+            print signature
             return make_response(echostr)
