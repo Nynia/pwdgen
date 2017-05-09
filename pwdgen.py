@@ -9,11 +9,10 @@ def wechat_auth():
     print 'hello world'
     if request.method == 'GET':
         token = 'cclove'
-        query = request.args
-        signature = query.get('signature', '')
-        timestamp = query.get('timestamp', '')
-        nonce = query.get('nonce', '')
-        echostr = query.get('echostr', '')
+        signature = request.args.get('signature', '')
+        timestamp = request.args.get('timestamp', '')
+        nonce = request.args.get('nonce', '')
+        echostr = request.args.get('echostr', '')
         s = [timestamp, nonce, token]
         s.sort()
         s = ''.join(s)
