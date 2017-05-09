@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def wechat_auth():
+    print request.args
     if request.method == 'GET':
         token = 'cclove'
         query = request.args
