@@ -31,7 +31,7 @@ def wechat_auth():
         content = xml_rec.find('Content').text
         print [touser,fromuser,content]
         print sumof(fromuser+touser)
-        password = gen_password(hashlib.sha1(content+touser),sumof(fromuser+touser))
+        password = gen_password(hashlib.sha1(content+touser).hexdigest(),sumof(fromuser+touser))
         print password
         xml_rep = '''<xml>
             <ToUserName><![CDATA[%s]]></ToUserName>
@@ -167,5 +167,3 @@ def sumof(str):
     for i in str:
         result += ord(i)
     return result
-
-print gen_password('ee',3566)
