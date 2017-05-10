@@ -166,3 +166,5 @@ def sumof(str):
     for i in str:
         result += ord(i)
     return result
+
+print gen_password('ee',3566)
