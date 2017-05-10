@@ -162,5 +162,5 @@ def gen_permutation(s1,s2,result):
 def sumof(str):
     result = 0
     for i in str:
-        result += chr(i)
+        result += ord(i)
     return result
