@@ -29,8 +29,8 @@ def wechat_auth():
         touser = xml_rec.find('ToUserName').text
         fromuser = xml_rec.find('FromUserName').text
         content = xml_rec.find('Content').text
-
-        password = gen_password(content,fromuser)
+        print touser,fromuser,content
+        password = gen_password(content,int(fromuser))
         xml_rep = '''<xml>
             <ToUserName><![CDATA[%s]]></ToUserName>
             <FromUserName><![CDATA[%s]]></FromUserName>
@@ -40,6 +40,7 @@ def wechat_auth():
             <FuncFlag>0</FuncFlag>
             </xml>
         '''
+        print password
         response = make_response(xml_rep % (fromuser, touser, str(int(time.time())), password))
         response.content_type = 'application/xml'
         return response
@@ -157,6 +158,3 @@ def gen_permutation(s1,s2,result):
             tmp_list = list(s1[:])
             tmp_list.remove(i)
             gen_permutation(''.join(tmp_list),s2+i,result)
-
-
-print gen_password('708350d2b717700b52f', 123489)
