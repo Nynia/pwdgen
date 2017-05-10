@@ -30,7 +30,7 @@ def wechat_auth():
         fromuser = xml_rec.find('FromUserName').text
         content = xml_rec.find('Content').text
         print [touser,fromuser,content]
-        password = gen_password(content,int(fromuser))
+        password = gen_password(content,sumof(fromuser+touser)
         xml_rep = '''<xml>
             <ToUserName><![CDATA[%s]]></ToUserName>
             <FromUserName><![CDATA[%s]]></FromUserName>
@@ -158,3 +158,9 @@ def gen_permutation(s1,s2,result):
             tmp_list = list(s1[:])
             tmp_list.remove(i)
             gen_permutation(''.join(tmp_list),s2+i,result)
+
+def sumof(str):
+    result = 0
+    for i in str:
+        result += chr(i)
+    return result
