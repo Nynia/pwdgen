@@ -71,82 +71,45 @@ def gen_password(str, openid):
         alpha.append((chr(i)))
     for i in xrange(97, 123):
         alpha.append((chr(i)))
-    for i in ['!', '@', '#', '$', '^', '&', '*']:
+    for i in ['!', '@', '#', '$', '^', '&','%','+']:
         alpha.append(i)
     seq = ''.join(['{:0=8b}'.format(ord(i)) for i in str]).lstrip('0')
-    i = 0
     result = ''
-    j = i+1
-    while j < len(seq):
-        slice = seq[i:j]
-        slice_int = int(slice, base=2)
-        if slice_int >= alpha.index('a') and slice_int <= alpha.index('z'):
-            result += alpha[slice_int]
-            break
-        j += 1
-        if slice_int > alpha.index('z'):
-            i = i+1
-            j = i+1
-    i = j
-    j = i+1
-    while j < len(seq):
-        slice = seq[i:j]
-        slice_int = int(slice, base=2)
-        if slice_int >= alpha.index('0') and slice_int <= alpha.index('9'):
-            result += alpha[slice_int]
-            break
-        j += 1
-        if slice_int > alpha.index('z'):
-            i = i+1
-            j = i+1
-    i = j
-    j = i + 1
-    while j < len(seq):
-        slice = seq[i:j]
-        slice_int = int(slice, base=2)
-        if slice_int >= alpha.index('A') and slice_int <= alpha.index('Z'):
-            result += alpha[slice_int]
-            break
-        j += 1
-        if slice_int > alpha.index('z'):
-            i = i+1
-            j = i+1
-    i = j
-    j = i + 1
-    while j < len(seq):
-        slice = seq[i:j]
-        slice_int = int(slice, base=2)
-        if slice_int >= alpha.index('!') and slice_int <= alpha.index('*'):
-            result += alpha[slice_int]
-            break
-        j += 1
-        if slice_int > alpha.index('z'):
-            i = i+1
-            j = i+1
-    i = j
-    j = i + 1
-    while j < len(seq):
-        slice = seq[i:j]
-        slice_int = int(slice, base=2)
-        if slice_int >= alpha.index('0') and slice_int <= alpha.index('9'):
-            result += alpha[slice_int]
-            break
-        j += 1
-        if slice_int > alpha.index('z'):
-            i = i+1
-            j = i+1
-    i = j
-    j = i + 1
-    while j < len(seq):
-        slice = seq[i:j]
-        slice_int = int(slice, base=2)
-        if slice_int >= alpha.index('a') and slice_int <= alpha.index('z'):
-            result += alpha[slice_int]
-            break
-        j += 1
-        if slice_int > alpha.index('z'):
-            i = i+1
-            j = i+1
+    i = 0
+    slice = seq[i:i+10]
+    slice_int = int(slice, base=2)
+    result += alpha[slice_int % 26]
+
+    while i < len(seq) and seq[i] == '0':
+        i += 1
+    slice = seq[i:i + 10]
+    slice_int = int(slice, base=2)
+    result += alpha[slice_int % 26 + 26]
+
+    while i < len(seq) and seq[i] == '0':
+        i += 1
+    slice = seq[i:i + 10]
+    slice_int = int(slice, base=2)
+    result += alpha[slice_int % 10 + 52]
+
+    while i < len(seq) and seq[i] == '0':
+        i += 1
+    slice = seq[i:i + 10]
+    slice_int = int(slice, base=2)
+    result += alpha[slice_int % 8 + 62]
+
+    while i < len(seq) and seq[i] == '0':
+        i += 1
+    slice = seq[i:i + 10]
+    slice_int = int(slice, base=2)
+    result += alpha[slice_int % 10 + 52]
+
+    while i < len(seq) and seq[i] == '0':
+        i += 1
+    slice = seq[i:i + 10]
+    slice_int = int(slice, base=2)
+    result += alpha[slice_int % 26]
+
     permutation_list = []
     gen_permutation('123456', '', permutation_list)
     residual = openid % 64
