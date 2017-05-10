@@ -75,7 +75,7 @@ def gen_password(str, openid):
     for i in ['!', '@', '#', '$', '^', '&','%','+']:
         alpha.append(i)
     seq = ''.join(['{:0=8b}'.format(ord(i)) for i in str]).lstrip('0')
-    print seq,len(seq)
+    print seq,len(alpha)
     result = ''
     i = 0
     slice = seq[i:i+10]
