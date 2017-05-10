@@ -150,6 +150,7 @@ def gen_password(str, openid):
     permutation_list = []
     gen_permutation('123456', '', permutation_list)
     residual = openid % 64
+    print result,residual
     return ''.join([result[int(i)-1] for i in permutation_list[residual]])
 
 def gen_permutation(s1,s2,result):
