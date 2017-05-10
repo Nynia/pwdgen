@@ -121,7 +121,7 @@ def gen_password(str, openid):
     slice = seq[i:i + 10]
     print i, slice,result
     slice_int = int(slice, base=2)
-    result += alpha[slice_int % 26 + 62]
+    result += alpha[slice_int % 8 + 62]
     i += 10
 
     print result
