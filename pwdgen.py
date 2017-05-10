@@ -30,6 +30,7 @@ def wechat_auth():
         fromuser = xml_rec.find('FromUserName').text
         content = xml_rec.find('Content').text
         print [touser,fromuser,content]
+        print sumof(fromuser+touser)
         password = gen_password(content,sumof(fromuser+touser))
         xml_rep = '''<xml>
             <ToUserName><![CDATA[%s]]></ToUserName>
