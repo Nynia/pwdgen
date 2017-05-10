@@ -64,7 +64,6 @@ def get_access_token():
 
 
 def gen_password(str, openid):
-    print str
     alpha = []
     for i in xrange(48, 58):
         alpha.append(chr(i))
@@ -75,11 +74,9 @@ def gen_password(str, openid):
     for i in ['!', '@', '#', '$', '^', '&','%','+']:
         alpha.append(i)
     seq = ''.join(['{:0=8b}'.format(ord(i)) for i in str]).lstrip('0')
-    print seq,len(alpha)
     result = ''
     i = 0
     slice = seq[i:i+10]
-    print i,slice,result
     slice_int = int(slice, base=2)
     result += alpha[slice_int % 10]
     i += 10
@@ -95,7 +92,6 @@ def gen_password(str, openid):
     while i < len(seq) and seq[i] == '0':
         i += 1
     slice = seq[i:i + 10]
-    print i, slice,result
     slice_int = int(slice, base=2)
     result += alpha[slice_int % 26 + 10]
     i += 10
@@ -111,7 +107,6 @@ def gen_password(str, openid):
     while i < len(seq) and seq[i] == '0':
         i += 1
     slice = seq[i:i + 10]
-    print i, slice,result
     slice_int = int(slice, base=2)
     result += alpha[slice_int % 26 + 36]
     i += 10
@@ -119,16 +114,13 @@ def gen_password(str, openid):
     while i < len(seq) and seq[i] == '0':
         i += 1
     slice = seq[i:i + 10]
-    print i, slice,result
     slice_int = int(slice, base=2)
     result += alpha[slice_int % 8 + 62]
     i += 10
 
-    print result
     permutation_list = []
     gen_permutation('123456', '', permutation_list)
     residual = openid % 64
-    print result,residual
     return ''.join([result[int(i)-1] for i in permutation_list[residual]])
 
 def gen_permutation(s1,s2,result):
