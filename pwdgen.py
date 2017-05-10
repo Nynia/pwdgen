@@ -79,7 +79,7 @@ def gen_password(str, openid):
     result = ''
     i = 0
     slice = seq[i:i+10]
-    print i,slice
+    print i,slice,result
     slice_int = int(slice, base=2)
     result += alpha[slice_int % 10]
     i += 10
@@ -87,7 +87,7 @@ def gen_password(str, openid):
     while i < len(seq) and seq[i] == '0':
         i += 1
     slice = seq[i:i + 10]
-    print i, slice
+    print i, slice,result
     slice_int = int(slice, base=2)
     result += alpha[slice_int % 10]
     i += 10
@@ -95,7 +95,7 @@ def gen_password(str, openid):
     while i < len(seq) and seq[i] == '0':
         i += 1
     slice = seq[i:i + 10]
-    print i, slice
+    print i, slice,result
     slice_int = int(slice, base=2)
     result += alpha[slice_int % 26 + 10]
     i += 10
@@ -103,7 +103,7 @@ def gen_password(str, openid):
     while i < len(seq) and seq[i] == '0':
         i += 1
     slice = seq[i:i + 10]
-    print i, slice
+    print i, slice,result
     slice_int = int(slice, base=2)
     result += alpha[slice_int % 26 + 36]
     i += 10
@@ -111,7 +111,7 @@ def gen_password(str, openid):
     while i < len(seq) and seq[i] == '0':
         i += 1
     slice = seq[i:i + 10]
-    print i, slice
+    print i, slice,result
     slice_int = int(slice, base=2)
     result += alpha[slice_int % 26 + 36]
     i += 10
@@ -119,11 +119,12 @@ def gen_password(str, openid):
     while i < len(seq) and seq[i] == '0':
         i += 1
     slice = seq[i:i + 10]
-    print i, slice
+    print i, slice,result
     slice_int = int(slice, base=2)
     result += alpha[slice_int % 26 + 62]
     i += 10
 
+    print result
     permutation_list = []
     gen_permutation('123456', '', permutation_list)
     residual = openid % 64
