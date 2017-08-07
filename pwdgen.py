@@ -23,6 +23,7 @@ def wechat_auth():
         s = ''.join(s)
         if (hashlib.sha1(s).hexdigest() == signature):
             return make_response(echostr)
+
     else:
         rec = request.stream.read()
         xml_rec = ET.fromstring(rec)
