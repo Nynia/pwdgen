@@ -8,6 +8,10 @@ import xml.etree.ElementTree as ET
 
 app = Flask(__name__)
 
+@app.route('/test', methods=['GET'])
+def test():
+    name = request.args.get('name')
+    return 'hello, %s' % name
 
 @app.route('/', methods=['GET', 'POST'])
 def wechat_auth():
@@ -47,7 +51,6 @@ def wechat_auth():
         response = make_response(xml_rep % (fromuser, touser, str(int(time.time())), password))
         response.content_type = 'application/xml'
         return response
-
 
 def get_access_token():
     url = 'https://api.weixin.qq.com/cgi-bin/token'
