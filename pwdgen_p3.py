@@ -55,6 +55,7 @@ def wechat_auth():
         return response
 
 
+
 def get_access_token():
     url = 'https://api.weixin.qq.com/cgi-bin/token'
     payload = {
